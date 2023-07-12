@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0"
+  },
+  "name": "webstore_back",
+  "description": "",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "webstore_back"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "endpoint",
+    "controller",
+    "view",
+    "route"
+  ],
+  "author": "ExpressDevs Team",
+  "license": "MIT"
+}
