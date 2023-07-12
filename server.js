@@ -1,10 +1,12 @@
 var app = require('./config/app')
 var debug = require('debug')
 var http = require('http');
+var configDB = require('./config/db.js')
 
 /**
  * Get port from environment and store in Express.
  */
+var db = configDB();
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
