@@ -4,4 +4,7 @@ let usersController = require('../controllers/user');
 
 router.post('/signup', usersController.signup);
 
+router.delete('/delete/:id', usersController.deleteUser);
+
 module.exports = router;
+
