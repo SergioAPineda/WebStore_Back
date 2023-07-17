@@ -9,5 +9,7 @@ router.put('/edit/:id', usersController.updateuser);
 
 router.delete('/delete/:id', usersController.deleteUser);
 
+router.get('/:id', usersController.getUserById); 
+
 module.exports = router;
 
