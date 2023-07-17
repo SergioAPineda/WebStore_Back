@@ -13,3 +13,25 @@ function getErrorMessage(err) {
       return 'Unknown server error';
   }
 };
+
+exports.requireAuth = function (req, res, next) {
+
+    passport.authenticate(
+      'tokencheck',
+      { session: false },
+      function (err, payload, info) {
+        if (err) return res.status(401).json(
+          {
+            success: false,
+            message: getErrorMessage(err)
+          }
+        );
+        if (info) return res.status(401).json({
+          success: false,
+          message: info.message
+        });
+  
+        req.payload = payload;
+        next();
+      })(req, res, next);
+}
