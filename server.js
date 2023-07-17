@@ -2,6 +2,7 @@ var app = require('./config/app')
 var debug = require('debug')
 var http = require('http');
 var configDB = require('./config/db.js')
+const configurePassport = require('./config/local');
 
 /**
  * Get port from environment and store in Express.
@@ -18,6 +19,7 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+let passport = configurePassport();
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

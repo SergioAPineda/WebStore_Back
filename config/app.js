@@ -1,10 +1,12 @@
 var express = require('express');
 var createError = require('http-errors');
+let passport = require('passport');
 
 var usersRouter = require('../routes/user');
 
 var app = express();
-app.use(express.json());
+
+app.use(passport.initialize());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
