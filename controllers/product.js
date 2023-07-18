@@ -26,11 +26,21 @@ module.exports.createProduct = async function (req, res, next) {
 
     console.log("Create User");
 
-    let product = new ProductModel(req.body);
+    //let product = new ProductModel(req.body);
+    let product = new ProductModel({
+        _id: req.body.id,
+        name: req.body.name,
+        category: req.body.category,
+        description: req.body.description,
+        isactive: req.body.isactive,
+        owner: (req.body.owner == null || req.body.owner == "")? req.payload.id : req.body.owner
+    });
 
     try {
 
         let result = await product.save();
+
+        console.log("req.payload.id " + req.payload.id);
 
         console.log(result);
         return res.json(
