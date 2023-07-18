@@ -147,8 +147,6 @@ module.exports.getUserById = async function (req, res, next) {
       }
     )
   }
-
-
 }
 
 function getErrorMessage(err) {
@@ -215,27 +213,19 @@ module.exports.signin = function (req, res, next) {
 }
 
 module.exports.deleteUser = async (req, res, next) => {
-  console.log("req: " + req.params)
   try {
 
-    //let id = req.params.id;
     let user_id = req.params.id;
 
     let result = await User.deleteOne({ _id: user_id });
 
-    //let result = await User.deleteById(id);
-
-    console.log("result " + result.deleteCount)
-    return res.json({ success: true, message: "User deleted" })
-    // if (result.deleteCount > 0) {
-
-    //   res.json({ success: true, message: "User deleted" })
-
-    // }
+    if(result.deletedCount > 0){
+      return res.json({ success: true, message: "User deleted" })
+    }else{
+      return res.json({ success: false, message: "User not found" })
+    }
 
   } catch (error) {
-
-    //return res.status(400).json({success: false, message: getErrorMessage("Error")})
 
     console.log(error);
 
