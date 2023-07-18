@@ -26,11 +26,11 @@ function getErrorMessage(err) {
   return message;
 };
 
-module.exports.deleteUser = async function (req, res, next)  {
+module.exports.deleteUser = async function (req, res, next) {
   try {
     let id = req.params.id;
     let result = await User.deleteOne({ _id: id });
-  
+
     return res.json({ success: true, message: "User deleted" })
 
   } catch (error) {
@@ -42,24 +42,24 @@ module.exports.deleteUser = async function (req, res, next)  {
 module.exports.userlist = async function (req, res, next) {
 
   console.log("All users");
-    try {
-      let userlist = await User.find({});
-      console.log(userlist);
-      
-      return res.json(userlist)
-      
+  try {
+    let userlist = await User.find({});
+    console.log(userlist);
 
-    } catch (error) {
-      
-      let message = getErrorMessage(error);
-  
-      return res.status(400).json(
-        {
-          success: false,
-          message: message
-        }
-      )
-    }
+    return res.json(userlist)
+
+
+  } catch (error) {
+
+    let message = getErrorMessage(error);
+
+    return res.status(400).json(
+      {
+        success: false,
+        message: message
+      }
+    )
+  }
 };
 
 module.exports.updateuser = async function (req, res, next) {
@@ -70,28 +70,27 @@ module.exports.updateuser = async function (req, res, next) {
     let id = req.params.id
 
     let updatedUser = { ...req.body };  // Builds updateduser from the values of the body of the request.
-    
+
     // Submits updatedUser to the DB and waits for a result.
     let result = await User.updateOne({ _id: id }, updatedUser);
-    
+
     console.log(result);
 
     // If the contact is updated redirects to the list
     if (result.modifiedCount > 0) {
-        res.json({
-          success:'true',
-          message: "User Updated Successfully"
-        })
+      res.json({
+        success: 'true',
+        message: "User Updated Successfully"
+      })
     }
     else {
-        // Express will catch this on its own.
-        throw new Error('User not updated. Are you sure they exists?') 
+      // Express will catch this on its own.
+      throw new Error('User not updated. Are you sure they exists?')
     }
 
-} catch (error) {
+  } catch (error) {
     next(error)
-}
-
+  }
 
 };
 
@@ -128,7 +127,7 @@ module.exports.signup = async function (req, res, next) {
   }
 };
 
-module.exports.getUserById = async function(req, res, next) {
+module.exports.getUserById = async function (req, res, next) {
   console.log("getUserById");
   try {
     let user_id = req.params.id;
@@ -136,7 +135,7 @@ module.exports.getUserById = async function(req, res, next) {
     console.log(user_id)
 
     let user = await User.findById(user_id);
-  
+
     return res.json(user);
   } catch (error) {
     let message = getErrorMessage(error);
@@ -150,7 +149,7 @@ module.exports.getUserById = async function(req, res, next) {
   }
 
 
-} 
+}
 
 function getErrorMessage(err) {
   console.log("===> Erro: " + err);
@@ -215,8 +214,8 @@ module.exports.signin = function (req, res, next) {
   )(req, res, next);
 }
 
-module.exports.deleteUser = async (req, res, next)=> {
-  console.log("req: "+req.params)
+module.exports.deleteUser = async (req, res, next) => {
+  console.log("req: " + req.params)
   try {
 
     //let id = req.params.id;
