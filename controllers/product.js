@@ -22,13 +22,11 @@ function getErrorMessage(err) {
     return message;
 };
 
-module.exports.createUser = async function (req, res, next) {
+module.exports.createProduct = async function (req, res, next) {
 
     console.log("Create User");
 
     let product = new ProductModel(req.body);
-
-    console.log(product);
 
     try {
 
@@ -53,3 +51,34 @@ module.exports.createUser = async function (req, res, next) {
         )
     }
 };
+
+module.exports.updateProduct = async function (req, res, next) {
+
+    try {
+  
+      let id = req.params.id
+  
+      let user = { ...req.body };
+  
+      let result = await ProductModel.updateOne({ _id: id }, user);
+  
+      console.log(result);
+  
+      if (result.modifiedCount > 0) {
+        res.json({
+          success: 'true',
+          message: "Product Updated Successfully"
+        })
+      }
+      else {
+        throw new Error('Product not updated. Please check the information and try again')
+      }
+  
+    } catch (error) {
+      next(error)
+    }
+  
+  };
+
+
+
