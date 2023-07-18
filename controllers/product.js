@@ -22,7 +22,7 @@ function getErrorMessage(err) {
     return message;
 };
 
-module.exports.createUser = async function (req, res, next) {
+module.exports.createProduct = async function (req, res, next) {
 
     console.log("Create User");
 
