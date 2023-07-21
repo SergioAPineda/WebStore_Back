@@ -1,11 +1,14 @@
 var express = require('express');
 var createError = require('http-errors');
 let passport = require('passport');
+var cors = require('cors')
 
 var usersRouter = require('../routes/user');
 var productRouter = require('../routes/product');
 
 var app = express();
+
+app.use(cors())
 
 app.use(passport.initialize());
 
