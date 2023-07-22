@@ -33,4 +33,9 @@ app.use(function (err, req, res, next) {
   });
 });
 
+const port = 3000; // Change this to your desired port
+app.listen(port, () => {
+  console.log(`Server started on http://localhost:${port}`);
+});
+
 module.exports = app;
