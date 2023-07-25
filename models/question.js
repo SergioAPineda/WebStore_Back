@@ -1,8 +1,8 @@
 let mongoose = require('mongoose')
 
-let commentModel = mongoose.Schema(
+let questionModel = mongoose.Schema(
     {
-	    commentary: {
+	    questionText: {
             type: String,
             required: true
         },
@@ -18,11 +18,12 @@ let commentModel = mongoose.Schema(
         userName: {
             type: String,
             required: true
-        }
+        },
+        answer: String
     },
     {
-        collection: "comments"
+        collection: "questions"
     } 
 )
 
-module.exports = mongoose.model("Comment", commentModel);
+module.exports = mongoose.model("Question", questionModel);

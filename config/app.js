@@ -5,6 +5,7 @@ var cors = require('cors')
 
 var usersRouter = require('../routes/user');
 var productRouter = require('../routes/product');
+var commentRouter = require('../routes/comment');
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/users', usersRouter);
 app.use('/product', productRouter);
+app.use('/comment', commentRouter);
 
 //catch 404 and forward to error handler
 app.use(function (req, res, next) {

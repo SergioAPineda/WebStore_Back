@@ -1,45 +1,46 @@
-let commentModel = require('../models/comment');
-function getErrorMessage(err){
-    console.log("===> Erro: " + err);
-    let message ='';
+let CommentModel = require('../models/comment');
 
-    if(err.code){
-        switch(err.code){
+function getErrorMessage(err) {
+    console.log("===> Erro: " + err);
+    let message = '';
+
+    if (err.code) {
+        switch (err.code) {
             case 11000:
             case 11001:
-        message ='Comment already exists';
-        break;
-        default:
-            message = 'Something went wrong';
+                message = 'Comment already exists';
+                break;
+            default:
+                message = 'Something went wrong';
         }
-    } else{
-        for(var errName in err.errors){
+    } else {
+        for (var errName in err.errors) {
             if (err.errors[errName].message) message = err.errors[errName].message;
         }
     }
     return message;
 };
 
-module.exports.createComment = async function (req, res, next){
+
+module.exports.createComment = async function (req, res, next) {
     console.log("Create Comment");
 
     //let comment = new CommentModel(req.body);
     let comment = new CommentModel({
         _id: req.body.id,
-        name: req.body.name,
-        category: req.body.category,
-        description: req.body.description,
-        isactive: req.body.isactive,
-        owner: (req.body.owner == null || req.body.owner == "")? req.payload.id : req.body.owner
+        commentary: req.body.commentary,
+        product: req.body.product,
+        userName: req.body.userName
     });
+
+    console.log(comment);
 
     try {
 
         let result = await comment.save();
 
-        console.log("req.payload.id " + req.payload.id);
-
         console.log(result);
+
         return res.json(
             {
                 success: true,
@@ -90,10 +91,11 @@ module.exports.updateComment = async function (req, res, next) {
 module.exports.getCommentList = async function (req, res, next) {
 
     console.log("List Comments");
-    try {
-        let commentsList = await CommentModel.find({isactive: true}).sort({name: 'asc'});
 
-        console.log(commentsList);
+    let id = req.params.id
+
+    try {
+        let commentsList = await CommentModel.find({product: id}).sort({created: -1});
 
         return res.json(commentsList)
 
@@ -114,46 +116,46 @@ module.exports.getCommentList = async function (req, res, next) {
 module.exports.getComment = async function (req, res, next) {
     console.log("getComment");
     try {
-      let comment_id = req.params.id;
-  
-      console.log(comment_id)
-  
-      let comment = await CommentModel.findById(comment_id);
-  
-      return res.json(comment);
-    } catch (error) {
-      let message = getErrorMessage(error);
-  
-      return res.status(400).json(
-        {
-          success: false,
-          message: message
-        }
-      )
-    }
-  }
+        let comment_id = req.params.id;
 
-  module.exports.deleteComment = async (req, res, next) => {
+        console.log(comment_id)
+
+        let comment = await CommentModel.findById(comment_id);
+
+        return res.json(comment);
+    } catch (error) {
+        let message = getErrorMessage(error);
+
+        return res.status(400).json(
+            {
+                success: false,
+                message: message
+            }
+        )
+    }
+}
+
+module.exports.deleteComment = async (req, res, next) => {
     try {
-  
-      let comment_id = req.params.id;
-  
-      let result = await CommentModel.deleteOne({ _id: comment_id });
 
-      console.log(result)
+        let comment_id = req.params.id;
 
-      if(result.deletedCount > 0){
-        return res.json({ success: true, message: "Comment deleted" })
-      }else{
-        return res.json({ success: false, message: "Comment not found" })
-      }
-  
+        let result = await CommentModel.deleteOne({ _id: comment_id });
+
+        console.log(result)
+
+        if (result.deletedCount > 0) {
+            return res.json({ success: true, message: "Comment deleted" })
+        } else {
+            return res.json({ success: false, message: "Comment not found" })
+        }
+
     } catch (error) {
-  
-      console.log(error);
-  
-      next(error)
-  
+
+        console.log(error);
+
+        next(error)
+
     }
-  
-  }
+
+}
