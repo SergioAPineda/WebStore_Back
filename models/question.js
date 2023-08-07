@@ -19,7 +19,8 @@ let questionModel = mongoose.Schema(
             type: String,
             required: true
         },
-        answer: String
+        answer: String,
+        isAnswered: Boolean
     },
     {
         collection: "questions"
