@@ -4,7 +4,7 @@ let passport = require('passport');
 var cors = require('cors')
 
 var usersRouter = require('../routes/user');
-var productRouter = require('../routes/product');
+var productRouter = require('../routes/products');
 var commentRouter = require('../routes/comment');
 var questionRouter = require('../routes/question')
 
