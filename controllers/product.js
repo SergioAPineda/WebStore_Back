@@ -144,21 +144,15 @@ module.exports.getProduct = async function (req, res, next) {
       let result = await ProductModel.deleteOne({ _id: product_id });
 
       console.log(result)
-
       if(result.deletedCount > 0){
         return res.json({ success: true, message: "Product deleted" })
       }else{
         return res.json({ success: false, message: "Product not found" })
       }
-  
     } catch (error) {
-  
       console.log(error);
-  
       next(error)
-  
     }
-  
   }
 
 
