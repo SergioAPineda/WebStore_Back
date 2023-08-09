@@ -7,6 +7,6 @@ router.post('/new', authController.requireAuth, productController.createProduct)
 router.put('/update/:id', authController.requireAuth, authController.isAllowed,productController.updateProduct);
 router.get('/', productController.getProductList);
 router.get('/:id', productController.getProduct);
-router.delete('delete/:id', authController.requireAuth, authController.isAllowed, productController.deleteProduct);
+router.delete('/delete/:id', authController.requireAuth, authController.isAllowed, productController.deleteProduct);
 
 module.exports = router;
