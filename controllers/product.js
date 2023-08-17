@@ -114,6 +114,33 @@ module.exports.getProductList = async function (req, res, next) {
     }
 };
 
+module.exports.getProductListbyUser = async function (req, res, next) {
+
+    console.log("List products for user");
+
+    let user_id = req.params.id;
+
+    try {
+        let productsList = await ProductModel.find({owner: user_id}).sort({name: 'asc'});
+
+        console.log(productsList);
+
+        return res.json(productsList)
+
+
+    } catch (error) {
+
+        let message = getErrorMessage(error);
+
+        return res.status(400).json(
+            {
+                success: false,
+                message: message
+            }
+        )
+    }
+};
+
 module.exports.getProduct = async function (req, res, next) {
     console.log("getProduct");
     try {
