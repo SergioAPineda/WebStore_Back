@@ -3,7 +3,7 @@ var createError = require('http-errors');
 let passport = require('passport');
 var cors = require('cors')
 
-var usersRouter = require('../routes/user');
+var usersRouter = require('../routes/users');
 var productRouter = require('../routes/products');
 var commentRouter = require('../routes/comment');
 var questionRouter = require('../routes/question')
