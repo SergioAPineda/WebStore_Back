@@ -94,7 +94,7 @@ module.exports.getProductList = async function (req, res, next) {
 
     console.log("List products");
     try {
-        let productsList = await ProductModel.find({isactive: true}).sort({name: 'asc'});
+        let productsList = await ProductModel.find().sort({name: 'asc'});
 
         console.log(productsList);
 
